@@ -16,7 +16,10 @@
 
 #------------------------------------------------------------------------
 if [[ -z "$INTERFACE" ]] ; then
-    INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+    INTERFACE=$(ls /sys/class/net | grep -E "^wl")
+    if [[ -z "$INTERFACE" ]] ; then
+        INTERFACE="${BLOCK_INSTANCE:-wlan0}"
+    fi
 fi
 #------------------------------------------------------------------------
 
